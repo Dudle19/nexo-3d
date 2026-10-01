@@ -2,6 +2,8 @@
 
 Experiencia web 3D de una conferencia virtual. Funciona sin compilación: basta servir esta carpeta con Laragon, Apache o cualquier servidor HTTP.
 
+![Vista de Nexo 3D con escenario, asistentes y controles de navegación](assets/nexo-3d-screenshot.png)
+
 ## Tecnología usada
 
 - **Three.js r128** abstrae WebGL y gestiona escena, cámara, luces, materiales, sombras, geometrías y raycasting.
