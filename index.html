@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#06111f">
+  <meta name="description" content="Demo modular de un espacio virtual 3D interactivo construido con Three.js.">
+  <title>Nexo 3D — Espacio virtual modular</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+  <noscript>Esta experiencia necesita JavaScript para renderizar el espacio 3D.</noscript>
+  <div id="scene-root" aria-label="Escena virtual 3D"></div>
+
+  <section id="welcome-screen" class="welcome" aria-labelledby="welcome-title">
+    <div class="welcome__card">
+      <div class="eyebrow"><span class="status-dot"></span> Experiencia interactiva</div>
+      <h1 id="welcome-title">Explora ideas<br><span>en otra dimensión.</span></h1>
+      <p>Una conferencia virtual construida con Three.js, organizada en módulos y lista para adaptar.</p>
+      <form id="welcome-form" class="welcome__form">
+        <label for="username-input">Tu nombre</label>
+        <div class="input-row">
+          <input id="username-input" name="username" maxlength="24" autocomplete="name" placeholder="Ej. Alex" required>
+          <button type="submit">Entrar <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+      <div class="welcome__meta"><span>WASD para moverte</span><span>Arrastra para explorar</span></div>
+    </div>
+  </section>
+
+  <main id="app-ui" class="ui" aria-hidden="true">
+    <header class="topbar panel">
+      <a class="brand" href="#" aria-label="Nexo 3D, inicio"><span class="brand__mark">N</span><span>NEXO <small>/ 3D LAB</small></span></a>
+      <nav aria-label="Acciones"><button class="ghost-button" id="guide-button" type="button">Cómo funciona</button><button class="icon-button" id="sound-button" type="button" aria-label="Activar sonidos" aria-pressed="false">♪</button></nav>
+    </header>
+    <aside class="location panel" aria-live="polite"><span class="location__number" id="location-number">01</span><div><strong id="location-title">Plaza central</strong><small id="location-hint">Acércate a una estación luminosa</small></div></aside>
+    <div class="reticle" aria-hidden="true"><span></span></div>
+    <aside class="controls panel" aria-label="Controles"><div class="key-grid" aria-hidden="true"><i></i><kbd>W</kbd><i></i><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div><div><strong>Moverse</strong><small>WASD o flechas · arrastra para rotar · rueda para zoom</small></div></aside>
+    <section class="chat panel" id="chat-panel" aria-label="Chat local">
+      <header><div><span class="status-dot"></span><strong>Chat del evento</strong></div><button id="chat-toggle" type="button" aria-label="Minimizar chat">−</button></header>
+      <div id="chat-messages" class="chat__messages" aria-live="polite"></div>
+      <form id="chat-form" class="chat__form"><label class="sr-only" for="chat-input">Mensaje</label><input id="chat-input" maxlength="160" autocomplete="off" placeholder="Escribe un mensaje…"><button type="submit" aria-label="Enviar mensaje">↑</button></form>
+    </section>
+    <div class="mobile-controls" aria-label="Controles táctiles"><button data-move="forward" aria-label="Avanzar">▲</button><button data-move="left" aria-label="Mover a la izquierda">◀</button><button data-move="backward" aria-label="Retroceder">▼</button><button data-move="right" aria-label="Mover a la derecha">▶</button></div>
+  </main>
+
+  <div id="kiosk-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal__card"><button class="modal__close" data-close-modal aria-label="Cerrar">×</button><div class="modal__visual"><span id="modal-icon">AI</span><div class="scan-line"></div></div><div class="eyebrow" id="modal-category">Estación interactiva</div><h2 id="modal-title">Workshop IA</h2><p id="modal-description"></p><button class="primary-button" data-close-modal>Volver a explorar</button></div>
+  </div>
+
+  <div id="guide-drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="guide-title" hidden>
+    <button class="drawer__backdrop" data-close-guide aria-label="Cerrar guía"></button>
+    <article class="drawer__content"><button class="modal__close" data-close-guide aria-label="Cerrar">×</button><div class="eyebrow">Guía del proyecto</div><h2 id="guide-title">Cómo está construida</h2><p>Esta demo usa <strong>Three.js</strong> sobre WebGL para dibujar una escena 3D en tiempo real. JavaScript coordina el render, los controles y la interfaz HTML.</p><div id="technology-list" class="tech-list"></div><h3>Adáptala a tu página</h3><ol><li>Edita estaciones, colores y límites en <code>src/config.js</code>.</li><li>Cambia edificios y geometrías en <code>src/scene.js</code>.</li><li>Integra tu API, CMS o WebSocket desde <code>src/app.js</code>.</li></ol><p class="drawer__note">Consulta <code>README.md</code> para ver la arquitectura completa y ejemplos de extensión.</p></article>
+  </div>
+  <div id="loading" class="loading"><div></div><span>Construyendo el espacio…</span></div>
+  <div id="error-message" class="error-message" hidden></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
